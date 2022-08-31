@@ -1,57 +1,57 @@
-var username,
-	correct_pass = (/^[0-9]{4}$/),
+var userName,
+	correctPass = (/^[0-9]{4}$/),
 	passTry = 3,
-	currentBalance = 35000;
+	currentBalance = 50000;
 	
-// Input a username
-function atmMachineUsername() {
-	username = prompt("Enter your name");
-	if (username !== "" && username !== null) {
-		atmMachinePassword();
+// Input a userName
+function chkuserName() {
+	userName = prompt("Enter your name");
+	if (userName !== "" && userName !== null) {
+		chkPassword();
 	} else {
-		atmMachineUsername();
+		chkuserName();
 	}
 }
 // Input a valid password
-function atmMachinePassword() {
-	var pswEntry = parseInt(prompt("Dear " + username + ", enter your 4 digit PIN"));
-	checkPassword(pswEntry);
+function chkPassword() {
+	var userPw = parseInt(prompt("hi " + userName + ", enter your PIN number"));
+	checkPassword(userPw);
 }
 // Verify Password meets requirements
 function checkPassword(userInput) {
-    if (correct_pass.test(userInput)){
-        selectAccountType();
+    if (correctPass.test(userInput)){
+        accountType();
     } else {
-        while (!(correct_pass.test(userInput))) {
+        while (!(correctPass.test(userInput))) {
             if (passTry === 1) {
 				alert("Incorrect PIN.");
-            	alert("Maximum tries exceeded! Your account has been locked. Contact your bank for support."); 
+            	alert("Your account has been locked. Contact to bank plz."); 
                 exit();
                 break;
             } else {
 				passTry -= 1;
 				alert("Incorrect PIN. Please try again.");
 				alert("You have " + passTry + " chance/s to try");
-            	atmMachinePassword();
+            	chkPassword();
 			}
         }
     }
 }
 // Select Which account type to use
-function selectAccountType() {
+function accountType() {
     var accountType = parseInt(prompt("Which type of account do you have? \n 1. Savings \n 2. Current \n 3. Credit"));
 	if (accountType !== "" && accountType !== null && !isNaN(accountType)) {
-		selectFunction();
+		selectCategory();
 	} else {
 		alert("Please make a valid selection");
-		selectAccountType();
+		accountType();
 	}
 }
 // Select what the user wishes to do
-function selectFunction() {
-	var atmFunctions = parseInt(prompt("Hello " + username + ", what can we do for you today? \n 1. Inquiry \n 2. Withdrawal \n 3. Deposit \n 4. Exit"));
-	if (atmFunctions !== "" && atmFunctions !== null && !isNaN(atmFunctions)) {
-		switch (atmFunctions) {
+function selectCategory() {
+	var atmCategory = parseInt(prompt("Hello " + userName + ", what can we do for you? \n 1. Inquiry \n 2. Withdrawal \n 3. Deposit \n 4. Exit"));
+	if (atmCategory !== "" && atmCategory !== null && !isNaN(atmCategory)) {
+		switch (atmCategory) {
 			case 1:
 				inquiry();
 				break;
@@ -66,11 +66,11 @@ function selectFunction() {
 				break;
 			default:
 				alert("Please make a valid selection");
-				selectFunction();
+				selectCategory();
 		}
 	} else {
 		alert("Please make a valid selection");
-		selectFunction();
+		selectCategory();
 	}
 }
 // Inquiry
@@ -83,7 +83,7 @@ function deposit() {
 	var depositAmount = parseInt(prompt("How much do you want to deposit?"));
 	if (depositAmount !== "" && depositAmount !== null && !isNaN(depositAmount)) {
 		currentBalance += depositAmount;
-		alert("You have successfully deposited $" + depositAmount + "\n" + "You now have $" + currentBalance);
+		alert("successfully deposited$" + depositAmount + "!\n" + "now you have $" + currentBalance);
 		toContinue();
 	} else {
 		alert("Error: please enter a number!");
@@ -92,20 +92,20 @@ function deposit() {
 }
 // Withdrawal
 function withdrawal() {
-	var withdrawalAmount = parseInt(prompt("How much do you want to withdraw? \n" + "The minimum amount you can withdraw is $1000"));
+	var withdrawalAmount = parseInt(prompt("How much do you want to withdraw? \n" + "The minimum amount you can withdraw is $100"));
 	if (withdrawalAmount !== "" && withdrawalAmount !== null && !isNaN(withdrawalAmount)) {
-		if (withdrawalAmount >= 1000) {
+		if (withdrawalAmount >= 100) {
 			if (withdrawalAmount <= currentBalance) {
 				currentBalance -= withdrawalAmount;
 				alert("Transaction successful!");
-				alert("Your remaining balance is $" + currentBalance);
+				alert("remaining balance : $" + currentBalance);
 				toContinue();
 			} else {
-				alert("You do not have sufficient funds!");
+				alert("do not have sufficient :(");
 				withdrawal();
 			}
 		} else {
-			alert("You must withdraw at least $1000");
+			alert("You must withdraw at least $100");
 			withdrawal();
 		}
 	} else {
@@ -121,7 +121,7 @@ function toContinue(){
 			exit();
     	}
 		else {
-			selectAccountType(); 
+			accountType(); 
     	}
 	} else {
 		alert("Please make a valid selection");
@@ -130,7 +130,7 @@ function toContinue(){
 }
 // Exit the ATM
 function exit() {
-	alert("Thank you for patronising our ATM machine");
+	alert("Thank you for coming and see you again :)");
 		// To simulate a real ATM, get ready for next user
-		// atmMachineUsername();
+		// chkuserName();
 }
