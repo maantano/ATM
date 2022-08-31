@@ -2,23 +2,19 @@
 1. Enter the name
 
 2. Enter the PIN NUMBER
-    2.a : Saving
-    2.b : Current
-    2.c : Credit
-    2.d : Exit
+	- 2.a : Saving
+	- 2.b : Current
+	- 2.c : Credit
+	- 2.d : Exit
 
 3. Select the type of service you want
-    3.a : Inquiry
-    3.b : Withdrawal
-    3.c : Deposit
-    3.d : Exit
-
-3.a Check balance and confirm call again
-3.b Check your current balance after withdrawal and see if you want to recall it again after doing so
-3.c Check your current balance after Deposit and see if you want to recall it again after doing so
-3.d Exit the service :) 
+    - 3.a : Inquiry : Check balance and confirm call again
+	- 3.b : Withdrawal : Check your current balance after withdrawal and see if you want to recall it again after doing so
+	- 3.c : Deposit : Check your current balance after Deposit and see if you want to recall it again after doing so
+	- 3.d : Exit : Exit the service :) 
 
 # ATM.html
+```html
 <!doctype html>
 <html>
   <head>
@@ -29,11 +25,11 @@
 
 </body>
 </html>
-
+```
 
 
 # ATM_function.js
-
+```javascript
 var userName,
 	correctPass = (/^[0-9]{4}$/),
 	passTry = 3,
@@ -190,3 +186,4 @@ function exit() {
 		// To simulate a real ATM, get ready for next user
 		// chkuserName();
 }
+```
