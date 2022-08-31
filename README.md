@@ -1,4 +1,23 @@
 # ATM
+1. Enter the name
+
+2. Enter the PIN NUMBER
+    2.a : Saving
+    2.b : Current
+    2.c : Credit
+    2.d : Exit
+
+3. Select the type of service you want
+    3.a : Inquiry
+    3.b : Withdrawal
+    3.c : Deposit
+    3.d : Exit
+
+3.a Check balance and confirm call again
+3.b Check your current balance after withdrawal and see if you want to recall it again after doing so
+3.c Check your current balance after Deposit and see if you want to recall it again after doing so
+3.d Exit the service :) 
+
 # ATM.html
 <!doctype html>
 <html>
@@ -20,7 +39,6 @@ var userName,
 	passTry = 3,
 	currentBalance = 50000;
 	
-
 // Input a userName
 function chkuserName() {
 	userName = prompt("Enter your name");
@@ -30,13 +48,11 @@ function chkuserName() {
 		chkuserName();
 	}
 }
-
 // Input a valid password
 function chkPassword() {
 	var userPw = parseInt(prompt("hi " + userName + ", enter your PIN number"));
 	checkPassword(userPw);
 }
-
 // Verify Password meets requirements
 function checkPassword(userInput) {
     if (correctPass.test(userInput)){
@@ -58,17 +74,30 @@ function checkPassword(userInput) {
     }
 }
 
-// Select Which account type to use
-function accountType() {
-    var accountType = parseInt(prompt("Which type of account do you have? \n 1. Savings \n 2. Current \n 3. Credit"));
-	if (accountType !== "" && accountType !== null && !isNaN(accountType)) {
-		selectCategory();
-	} else {
-		alert("Please make a valid selection");
-		accountType();
-	}
+// Recursion Function
+function again(){
+	accountType()
 }
 
+// Select Which account type to use
+function accountType() {
+    var accountType = parseInt(prompt("Which type of account do you have? \n 1. Savings \n 2. Current \n 3. Credit \n 4. Exit"));
+	if (accountType !== "" && accountType !== null && !isNaN(accountType)) {
+		if(accountType ==1 || accountType ==2 || accountType ==3){
+			selectCategory();
+		}else{
+			if(accountType ==4){
+				exit();
+			}else{
+				alert("Please select a valid selection");
+				again()	
+			}	
+		}
+	} else {
+		alert("Please make a valid selection");
+		again()
+	}
+}
 // Select what the user wishes to do
 function selectCategory() {
 	var atmCategory = parseInt(prompt("Hello " + userName + ", what can we do for you? \n 1. Inquiry \n 2. Withdrawal \n 3. Deposit \n 4. Exit"));
@@ -107,7 +136,7 @@ function deposit() {
 	var depositAmount = parseInt(prompt("How much do you want to deposit?"));
 	if (depositAmount !== "" && depositAmount !== null && !isNaN(depositAmount)) {
 		currentBalance += depositAmount;
-		alert("successfully deposited$" + depositAmount + "!\n" + "now you have $" + currentBalance);
+		alert("successfully deposited! $" + depositAmount + "\n" + "now you have $" + currentBalance);
 		toContinue();
 	} else {
 		alert("Error: please enter a number!");
@@ -161,6 +190,3 @@ function exit() {
 		// To simulate a real ATM, get ready for next user
 		// chkuserName();
 }
-
-
-

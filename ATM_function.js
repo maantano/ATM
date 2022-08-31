@@ -37,14 +37,26 @@ function checkPassword(userInput) {
         }
     }
 }
+function again(){
+	accountType()
+}
 // Select Which account type to use
 function accountType() {
-    var accountType = parseInt(prompt("Which type of account do you have? \n 1. Savings \n 2. Current \n 3. Credit"));
+    var accountType = parseInt(prompt("Which type of account do you have? \n 1. Savings \n 2. Current \n 3. Credit \n 4. Exit"));
 	if (accountType !== "" && accountType !== null && !isNaN(accountType)) {
-		selectCategory();
+		if(accountType ==1 || accountType ==2 || accountType ==3){
+			selectCategory();
+		}else{
+			if(accountType ==4){
+				exit();
+			}else{
+				alert("Please select a valid selection");
+				again()	
+			}	
+		}
 	} else {
 		alert("Please make a valid selection");
-		accountType();
+		again()
 	}
 }
 // Select what the user wishes to do
@@ -83,7 +95,7 @@ function deposit() {
 	var depositAmount = parseInt(prompt("How much do you want to deposit?"));
 	if (depositAmount !== "" && depositAmount !== null && !isNaN(depositAmount)) {
 		currentBalance += depositAmount;
-		alert("successfully deposited$" + depositAmount + "!\n" + "now you have $" + currentBalance);
+		alert("successfully deposited! $" + depositAmount + "\n" + "now you have $" + currentBalance);
 		toContinue();
 	} else {
 		alert("Error: please enter a number!");
